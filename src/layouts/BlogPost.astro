@@ -1,0 +1,60 @@
+---
+import Layout from './Layout.astro';
+import Heading from '../components/ui/Heading.astro';
+import Price from '../components/ui/Price.astro';
+import { formatDate } from '../utils/dateUtils';
+
+interface Props {
+  title: string;
+  destination: string;
+  price: number;
+  airline: string;
+  departureDate: string;
+  returnDate: string;
+  publishDate: Date;
+}
+
+const { title, destination, price, airline, departureDate, returnDate, publishDate } = Astro.props;
+---
+
+<Layout title={title}>
+  <article class="max-w-3xl mx-auto px-4 py-8">
+    <div class="mb-8">
+      <Heading level={1} className="text-4xl mb-2">{title}</Heading>
+      <div class="text-gray-400">
+        Published on {formatDate(publishDate)}
+      </div>
+    </div>
+
+    <div class="bg-gray-800 rounded-lg p-6 mb-8">
+      <div class="grid grid-cols-2 gap-4">
+        <div>
+          <Heading level={2} className="text-xl text-gray-400">Destination</Heading>
+          <p class="text-white">{destination}</p>
+        </div>
+        <div>
+          <Heading level={2} className="text-xl text-gray-400">Price</Heading>
+          <Price amount={price} className="text-2xl" />
+        </div>
+        <div>
+          <Heading level={2} className="text-xl text-gray-400">Airline</Heading>
+          <p class="text-white">{airline}</p>
+        </div>
+        <div>
+          <Heading level={2} className="text-xl text-gray-400">Dates</Heading>
+          <p class="text-white">{departureDate} - {returnDate}</p>
+        </div>
+      </div>
+    </div>
+
+    <div class="prose prose-invert">
+      <slot />
+    </div>
+  </article>
+</Layout>
+
+<style>
+  .prose {
+    max-width: none;
+  }
+</style>

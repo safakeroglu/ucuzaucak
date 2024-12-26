@@ -1,0 +1,34 @@
+---
+import Layout from '../layouts/Layout.astro';
+import { FlightDealCard } from '../components/deals/FlightDealCard';
+import UsefulInfo from '../components/sections/UsefulInfo.astro';
+
+const deals = [
+  {
+    from: "Istanbul",
+    to: "Bangkok",
+    price: 15777,
+    currency: "TL",
+    availableMonths: ["February", "March", "April"],
+    postedAt: new Date(Date.now() - 2 * 60 * 60 * 1000),
+    href: "/deals/istanbul-bangkok"
+  },
+  // ... rest of the deals array
+];
+---
+
+<Layout title="Cheapest Flight Tickets - Daily Deals">
+  <main class="min-h-screen bg-background">
+    <div class="container py-8">
+      <h1 class="text-4xl font-bold text-center mb-8">Latest Flight Deals</h1>
+      
+      <div class="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-4 gap-4">
+        {deals.map(deal => (
+          <FlightDealCard client:load {...deal} />
+        ))}
+      </div>
+    </div>
+    
+    <UsefulInfo />
+  </main>
+</Layout>

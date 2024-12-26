@@ -1,0 +1,34 @@
+---
+import Heading from './ui/Heading.astro';
+import Price from './ui/Price.astro';
+
+interface Props {
+  title: string;
+  destination: string;
+  price: number;
+  airline: string;
+  href: string;
+}
+
+const { href, title, destination, price, airline } = Astro.props;
+---
+
+<a href={href} class="block">
+  <div class="bg-gray-800 rounded-lg p-6 transition-transform hover:scale-105">
+    <Heading level={2} className="text-2xl mb-2">{title}</Heading>
+    <div class="grid grid-cols-2 gap-4">
+      <div>
+        <p class="text-gray-400">Destination</p>
+        <p class="text-white">{destination}</p>
+      </div>
+      <div>
+        <p class="text-gray-400">Price</p>
+        <Price amount={price} className="text-2xl" />
+      </div>
+      <div>
+        <p class="text-gray-400">Airline</p>
+        <p class="text-white">{airline}</p>
+      </div>
+    </div>
+  </div>
+</a>
